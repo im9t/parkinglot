@@ -3,37 +3,39 @@ package org.oobootcamp.ParkingLot;
 import java.util.HashMap;
 
 import org.oobootcamp.ParkingLot.Model.Car;
-import org.oobootcamp.ParkingLot.Model.InvalidTicket;
-import org.oobootcamp.ParkingLot.Model.ParkingOutPut;
+import org.oobootcamp.ParkingLot.Model.Result;
 import org.oobootcamp.ParkingLot.Model.Ticket;
 
 public class ParkingLot {
-   private HashMap<Ticket, Car> parkingSpaceAndCar;
-   private int parkingSpaceNum = 50;
+   private HashMap<Ticket, Car> ticketAndCar;
+   private int capacity ;
 
-   public ParkingLot(){
-       parkingSpaceAndCar = new HashMap<Ticket, Car>();
+   public ParkingLot(int capacity) {
+       this.capacity = capacity;
+       ticketAndCar = new HashMap<Ticket, Car>();
    }
 
-   public ParkingLot(int spaceNum) {
-       this();
-       parkingSpaceNum = spaceNum;
-   }
-
-   public ParkingOutPut ParkCar(Car aCar) {
-       if (parkingSpaceAndCar.size() < parkingSpaceNum) {
-           var ticket = new Ticket();
-           parkingSpaceAndCar.put(ticket, aCar);
-           return ticket;
+   public Result<Ticket> parkCar(Car car) {
+       var parkCarSuccessed = false;
+       var info = "停车失败";
+       Ticket ticket = null;
+       boolean canParkMore = ticketAndCar.size() < capacity;
+       if (canParkMore) {
+           parkCarSuccessed = true;
+           info = "";
+           ticket = new Ticket();
+           ticketAndCar.put(ticket, car);
        }
-       return new InvalidTicket();
+       return new Result<Ticket>(parkCarSuccessed, info, ticket);
    }
 
-   public Car GetCar(ParkingOutPut ticket) {
-       if (ticket instanceof Ticket validTicket) {
-           return parkingSpaceAndCar.get(validTicket);
+   public Result<Car> getCar(Ticket ticket) {
+       var getCarSuccessed = false;
+       var info = "Ticket无效";
+       if (ticketAndCar.containsKey(ticket)) {
+           getCarSuccessed = true;
+           info = "";
        }
-       return null;
+       return new Result<Car>(getCarSuccessed, info, ticketAndCar.remove(ticket));
    }
-
 }
