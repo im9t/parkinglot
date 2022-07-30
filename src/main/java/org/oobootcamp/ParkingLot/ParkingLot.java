@@ -7,10 +7,8 @@ import org.oobootcamp.ParkingLot.Model.Result;
 import org.oobootcamp.ParkingLot.Model.Ticket;
 
 public class ParkingLot {
-   private final String parkingFailErrorMessage = "停车位已满";
-   private final String pickUpFailErrorMessage = "Ticket无效";
-   private HashMap<Ticket, Car> ticketsAndCars;
-   private int capacity ;
+    private final HashMap<Ticket, Car> ticketsAndCars;
+   private final int capacity ;
 
    public ParkingLot(int capacity) {
        this.capacity = capacity;
@@ -24,6 +22,7 @@ public class ParkingLot {
            ticketsAndCars.put(ticket, car);
            return new Result<Ticket>(true, "", ticket);
        }
+       String parkingFailErrorMessage = "停车位已满";
        return new Result<Ticket>(false, parkingFailErrorMessage, null);
    }
 
@@ -31,6 +30,7 @@ public class ParkingLot {
        if (ticketsAndCars.containsKey(ticket)) {
            return new Result<Car>(true, "", ticketsAndCars.remove(ticket));
        }
+       String pickUpFailErrorMessage = "Ticket无效";
        return new Result<Car>(false, pickUpFailErrorMessage, null);
    }
 }
