@@ -1,13 +1,13 @@
 package org.oobootcamp.ParkingLot.Model;
 
 public class Result<T> {
-    public final boolean isSuccess;
-    public final String errorInfo;
+    public final boolean isSuccessed;
+    public final String errorMessage;
     public final T value;
-    public Result(boolean isSuccess, String errorInfo, T value)
+    public Result(boolean isSuccessed, String errorMessage, T value)
     {
-        this.isSuccess = isSuccess;
-        this.errorInfo = errorInfo;
+        this.isSuccessed = isSuccessed;
+        this.errorMessage = errorMessage;
         this.value = value;
     }
 }

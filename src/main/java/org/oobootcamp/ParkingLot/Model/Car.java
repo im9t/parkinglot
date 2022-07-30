@@ -1,11 +1,9 @@
 package org.oobootcamp.ParkingLot.Model;
-
-import java.util.Random;
+import java.util.UUID;
 
 public class Car {
-    public int Number;
+    public UUID number;
     public Car(){
-        Random random = new Random();
-        Number = random.nextInt();
+        number = UUID.randomUUID();
     }
 }

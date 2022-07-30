@@ -7,35 +7,30 @@ import org.oobootcamp.ParkingLot.Model.Result;
 import org.oobootcamp.ParkingLot.Model.Ticket;
 
 public class ParkingLot {
-   private HashMap<Ticket, Car> ticketAndCar;
+   private final String parkingFailErrorMessage = "停车位已满";
+   private final String pickUpFailErrorMessage = "Ticket无效";
+   private HashMap<Ticket, Car> ticketsAndCars;
    private int capacity ;
 
    public ParkingLot(int capacity) {
        this.capacity = capacity;
-       ticketAndCar = new HashMap<Ticket, Car>();
+       ticketsAndCars = new HashMap<Ticket, Car>();
    }
 
-   public Result<Ticket> parkCar(Car car) {
-       var parkCarSuccessed = false;
-       var info = "停车失败";
-       Ticket ticket = null;
-       boolean canParkMore = ticketAndCar.size() < capacity;
+   public Result<Ticket> park(Car car) {
+       boolean canParkMore = ticketsAndCars.size() < capacity;
        if (canParkMore) {
-           parkCarSuccessed = true;
-           info = "";
-           ticket = new Ticket();
-           ticketAndCar.put(ticket, car);
+           Ticket ticket = new Ticket();
+           ticketsAndCars.put(ticket, car);
+           return new Result<Ticket>(true, "", ticket);
        }
-       return new Result<Ticket>(parkCarSuccessed, info, ticket);
+       return new Result<Ticket>(false, parkingFailErrorMessage, null);
    }
 
-   public Result<Car> getCar(Ticket ticket) {
-       var getCarSuccessed = false;
-       var info = "Ticket无效";
-       if (ticketAndCar.containsKey(ticket)) {
-           getCarSuccessed = true;
-           info = "";
+   public Result<Car> pickUp(Ticket ticket) {
+       if (ticketsAndCars.containsKey(ticket)) {
+           return new Result<Car>(true, "", ticketsAndCars.remove(ticket));
        }
-       return new Result<Car>(getCarSuccessed, info, ticketAndCar.remove(ticket));
+       return new Result<Car>(false, pickUpFailErrorMessage, null);
    }
 }
