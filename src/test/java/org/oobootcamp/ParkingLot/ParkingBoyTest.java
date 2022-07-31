@@ -25,7 +25,7 @@ public class ParkingBoyTest {
 
         Result<Ticket> parkingResult = parkingBoy.park(car);
 
-        assertTrue(parkingResult.isSucceed);
+        assertTrue(parkingResult.isSucceed());
         assertNotNull(parkingResult.value);
     }
 
@@ -39,7 +39,7 @@ public class ParkingBoyTest {
 
         Result<Ticket> parkingResult = parkingBoy.park(car);
 
-        assertFalse(parkingResult.isSucceed);
+        assertFalse(parkingResult.isSucceed());
         assertNull(parkingResult.value);
         assertEquals("停车位已满", parkingResult.errorMessage);
     }
@@ -55,11 +55,11 @@ public class ParkingBoyTest {
         Car car = new Car();
 
         Result<Ticket> parkingResult = parkingBoy.park(car);
-        assertTrue(parkingResult.isSucceed);
+        assertTrue(parkingResult.isSucceed());
 
         // this indicates that the card is parked in A parking lot
         Result<Ticket> parkingResultForA = parkingLotA.park(new Car());
-        assertFalse(parkingResultForA.isSucceed);
+        assertFalse(parkingResultForA.isSucceed());
     }
 
     @Test
@@ -72,11 +72,11 @@ public class ParkingBoyTest {
         ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
         Car car = new Car();
         Result<Ticket> parkingResult = parkingBoy.park(car);
-        assertTrue(parkingResult.isSucceed);
+        assertTrue(parkingResult.isSucceed());
 
         Result<Car> pickUpResult = parkingBoy.pickUp(parkingResult.value);
 
-        assertTrue(pickUpResult.isSucceed);
+        assertTrue(pickUpResult.isSucceed());
         assertNotNull(pickUpResult.value);
         assertEquals(car.number, pickUpResult.value.number);
     }
@@ -97,7 +97,7 @@ public class ParkingBoyTest {
 
         Result<Car> pickUpResult = parkingBoyTwo.pickUp(parkResultFromParkingBoyOne.value);
 
-        assertFalse(pickUpResult.isSucceed);
+        assertFalse(pickUpResult.isSucceed());
         assertEquals("Ticket 无效", pickUpResult.errorMessage);
     }
 
@@ -109,13 +109,13 @@ public class ParkingBoyTest {
             }
         });
         Result<Ticket> parkingResult = parkingBoy.park(new Car());
-        assertTrue(parkingResult.isSucceed);
+        assertTrue(parkingResult.isSucceed());
         Result<Car> pickUpResult = parkingBoy.pickUp(parkingResult.value);
-        assertTrue(pickUpResult.isSucceed);
+        assertTrue(pickUpResult.isSucceed());
 
         Result<Car> secondPickUpResult = parkingBoy.pickUp(parkingResult.value);
 
-        assertFalse(secondPickUpResult.isSucceed);
+        assertFalse(secondPickUpResult.isSucceed());
         assertEquals("Ticket 无效", secondPickUpResult.errorMessage);
     }
 }

@@ -20,17 +20,17 @@ public class ParkingLot {
        if (canParkMore) {
            Ticket ticket = new Ticket();
            ticketsAndCars.put(ticket, car);
-           return new Result<Ticket>(true, "", ticket);
+           return new Result<Ticket>(ticket);
        }
        String parkingFailErrorMessage = "停车位已满";
-       return new Result<Ticket>(false, parkingFailErrorMessage, null);
+       return new Result<Ticket>(parkingFailErrorMessage);
    }
 
    public Result<Car> pickUp(Ticket ticket) {
        if (ticketsAndCars.containsKey(ticket)) {
-           return new Result<Car>(true, "", ticketsAndCars.remove(ticket));
+           return new Result<Car>(ticketsAndCars.remove(ticket));
        }
        String pickUpFailErrorMessage = "Ticket无效";
-       return new Result<Car>(false, pickUpFailErrorMessage, null);
+       return new Result<Car>(pickUpFailErrorMessage);
    }
 }

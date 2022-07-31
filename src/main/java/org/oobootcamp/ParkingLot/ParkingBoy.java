@@ -17,20 +17,20 @@ public class ParkingBoy {
     public Result<Ticket> park(Car car) {
         for (ParkingLot parkingLot : parkingLots) {
             var parkingResult = parkingLot.park(car);
-            if (parkingResult.isSucceed) {
+            if (parkingResult.isSucceed()) {
                 return parkingResult;
             }
         }
-        return new Result<>(false, "停车位已满", null);
+        return new Result<>("停车位已满");
     }
 
     public Result<Car> pickUp(Ticket ticket) {
         for (ParkingLot parkingLot : parkingLots) {
             var pickUpResult = parkingLot.pickUp(ticket);
-            if (pickUpResult.isSucceed) {
+            if (pickUpResult.isSucceed()) {
                 return  pickUpResult;
             }
         }
-        return new Result<>(false, "Ticket 无效", null);
+        return new Result<>("Ticket 无效");
     }
 }

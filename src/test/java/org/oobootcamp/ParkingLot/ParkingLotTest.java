@@ -18,7 +18,7 @@ public class ParkingLotTest {
         ParkingLot parkingLot = new ParkingLot(100);
         Car car = new Car();
         Result<Ticket> result = parkingLot.park(car);
-        assertTrue(result.isSucceed);
+        assertTrue(result.isSucceed());
         assertThat(result.value).isNotNull();
         assertThat(result.errorMessage).isEmpty();
     }
@@ -28,7 +28,7 @@ public class ParkingLotTest {
         ParkingLot parkingLot = new ParkingLot(0);
         Car car = new Car();
         Result<Ticket> result = parkingLot.park(car);
-        assertFalse(result.isSucceed);
+        assertFalse(result.isSucceed());
         assertNull(result.value);
         assertEquals("停车位已满", result.errorMessage);
     }
@@ -39,7 +39,7 @@ public class ParkingLotTest {
         Car car = new Car();
         Result<Ticket> parkingResult = parkingLot.park(car);
         Result<Car> pickUpResult = parkingLot.pickUp(parkingResult.value);
-        assertTrue(pickUpResult.isSucceed);
+        assertTrue(pickUpResult.isSucceed());
         assertThat(pickUpResult.errorMessage).isEmpty();
         assertThat(pickUpResult.value.number).isEqualTo(car.number);
     }
@@ -52,7 +52,7 @@ public class ParkingLotTest {
         Result<Ticket> parkingTicket = parkingLotA.park(car);
         Result<Car> pickUpResult = parkingLotB.pickUp(parkingTicket.value);
         assertNull(pickUpResult.value);
-        assertFalse(pickUpResult.isSucceed);
+        assertFalse(pickUpResult.isSucceed());
         assertEquals("Ticket无效", pickUpResult.errorMessage);
     }
 
@@ -62,9 +62,9 @@ public class ParkingLotTest {
         Car car = new Car();
         Result<Ticket> parkingTicket = parkingLot.park(car);
         Result<Car> firstPickUpResult = parkingLot.pickUp(parkingTicket.value);
-        assertTrue(firstPickUpResult.isSucceed);
+        assertTrue(firstPickUpResult.isSucceed());
         Result<Car> secondPickUpResult = parkingLot.pickUp(parkingTicket.value);
-        assertFalse(secondPickUpResult.isSucceed);
+        assertFalse(secondPickUpResult.isSucceed());
         assertEquals("Ticket无效", secondPickUpResult.errorMessage);
     }
 }
