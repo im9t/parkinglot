@@ -14,7 +14,7 @@ import org.oobootcamp.ParkingLot.Model.Ticket;
 
 public class ParkingLotTest {
     @Test
-    void should_get_ticket_when_parking_car_given_100_capacity_avalable() {
+    void should_get_ticket_when_parking_car_given_100_capacity_available() {
         ParkingLot parkingLot = new ParkingLot(100);
         Car car = new Car();
         Result<Ticket> result = parkingLot.park(car);
@@ -61,8 +61,8 @@ public class ParkingLotTest {
         ParkingLot parkingLot = new ParkingLot(2);
         Car car = new Car();
         Result<Ticket> parkingTicket = parkingLot.park(car);
-        Result<Car> firtPickUpResult = parkingLot.pickUp(parkingTicket.value);
-        assertTrue(firtPickUpResult.isSucceed);
+        Result<Car> firstPickUpResult = parkingLot.pickUp(parkingTicket.value);
+        assertTrue(firstPickUpResult.isSucceed);
         Result<Car> secondPickUpResult = parkingLot.pickUp(parkingTicket.value);
         assertFalse(secondPickUpResult.isSucceed);
         assertEquals("Ticket无效", secondPickUpResult.errorMessage);
