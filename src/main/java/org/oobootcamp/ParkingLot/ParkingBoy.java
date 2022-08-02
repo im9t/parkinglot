@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.oobootcamp.ParkingLot.Model.Car;
 import org.oobootcamp.ParkingLot.Model.Result;
 import org.oobootcamp.ParkingLot.Model.Ticket;
+import org.oobootcamp.ParkingLot.ParkingLotExceptions.ParkingLotIsFullException;
+import org.oobootcamp.ParkingLot.ParkingLotExceptions.TicketInvalidException;
 
 public class ParkingBoy {
 
@@ -14,23 +16,25 @@ public class ParkingBoy {
         this.parkingLots = new ArrayList<>(parkingLots);
     }
 
-    public Result<Ticket> park(Car car) {
+    public Ticket park(Car car) throws ParkingLotIsFullException {
         for (ParkingLot parkingLot : parkingLots) {
-            var parkingResult = parkingLot.park(car);
-            if (parkingResult.isSucceed()) {
-                return parkingResult;
+            if (parkingLot.canParkMore()) {
+                return parkingLot.park(car);
             }
         }
-        return new Result<>("停车位已满");
+        throw  new ParkingLotIsFullException();
     }
 
-    public Result<Car> pickUp(Ticket ticket) {
+    public Car pickUp(Ticket ticket) throws TicketInvalidException {
         for (ParkingLot parkingLot : parkingLots) {
-            var pickUpResult = parkingLot.pickUp(ticket);
-            if (pickUpResult.isSucceed()) {
+            try
+            {
+                var pickUpResult = parkingLot.pickUp(ticket);
                 return  pickUpResult;
             }
+            catch (TicketInvalidException e) {
+            }
         }
-        return new Result<>("Ticket 无效");
+        throw new TicketInvalidException();
     }
 }
