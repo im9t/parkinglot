@@ -7,11 +7,11 @@ import org.oobootcamp.ParkingLot.Model.Ticket;
 import org.oobootcamp.ParkingLot.ParkingLotExceptions.ParkingLotIsFullException;
 import org.oobootcamp.ParkingLot.ParkingLotExceptions.TicketInvalidException;
 
-public class ParkingBoy {
+public class GraduateParkingBoy {
 
     private final ArrayList<ParkingLot> parkingLots;
 
-    public ParkingBoy(ArrayList<ParkingLot> parkingLots) {
+    public GraduateParkingBoy(ArrayList<ParkingLot> parkingLots) {
         this.parkingLots = new ArrayList<>(parkingLots);
     }
 

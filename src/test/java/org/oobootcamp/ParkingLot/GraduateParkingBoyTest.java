@@ -12,16 +12,16 @@ import org.oobootcamp.ParkingLot.ParkingLotExceptions.TicketInvalidException;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ParkingBoyTest {
+public class GraduateParkingBoyTest {
     @Test
     void should_parking_succeed_and_get_ticked_when_parking_car_given_parking_boy_has_available_parking_lot() throws ParkingLotIsFullException {
         ArrayList<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot(0));
         parkingLots.add(new ParkingLot(2));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingLots);
         Car car = new Car();
 
-        Ticket parkingResult = parkingBoy.park(car);
+        Ticket parkingResult = graduateParkingBoy.park(car);
 
         assertNotNull(parkingResult);
     }
@@ -31,12 +31,12 @@ public class ParkingBoyTest {
         ArrayList<ParkingLot> parkingLots = new ArrayList<>();
         parkingLots.add(new ParkingLot(0));
         parkingLots.add(new ParkingLot(0));
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingLots);
         Car car = new Car();
 
 
         ParkingLotIsFullException exception = assertThrows(ParkingLotIsFullException.class,
-                () -> parkingBoy.park(car));
+                () -> graduateParkingBoy.park(car));
 
         assertThat(exception).hasMessageContaining("停车位已满");
     }
@@ -48,10 +48,10 @@ public class ParkingBoyTest {
         parkingLots.add(parkingLotA);
         ParkingLot parkingLotB = new ParkingLot(1);
         parkingLots.add(parkingLotB);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingLots);
         Car car = new Car();
 
-        Ticket parkingResult = parkingBoy.park(car);
+        Ticket parkingResult = graduateParkingBoy.park(car);
         assertNotNull(parkingResult);
 
         // this indicates that the card is parked in A parking lot
@@ -67,50 +67,50 @@ public class ParkingBoyTest {
         parkingLots.add(parkingLotA);
         ParkingLot parkingLotB = new ParkingLot(1);
         parkingLots.add(parkingLotB);
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLots);
+        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(parkingLots);
         Car car = new Car();
-        Ticket parkingResult = parkingBoy.park(car);
+        Ticket parkingResult = graduateParkingBoy.park(car);
         assertNotNull(parkingResult);
 
-        Car pickUpResult = parkingBoy.pickUp(parkingResult);
+        Car pickUpResult = graduateParkingBoy.pickUp(parkingResult);
 
         assertNotNull(pickUpResult);
         assertEquals(car.number, pickUpResult.number);
     }
 
     @Test
-    void should_pick_up_failed_when_pick_up_given_ticket_belongs_to_other_parking_boy() throws ParkingLotIsFullException, TicketInvalidException {
-        ParkingBoy parkingBoyOne = new ParkingBoy(new ArrayList<>() {
+    void should_pick_up_failed_when_pick_up_given_ticket_belongs_to_other_parking_boy() throws ParkingLotIsFullException{
+        GraduateParkingBoy graduateParkingBoyOne = new GraduateParkingBoy(new ArrayList<>() {
             {
                 add(new ParkingLot(1));
             }
         });
-        ParkingBoy parkingBoyTwo = new ParkingBoy(new ArrayList<>() {
+        GraduateParkingBoy graduateParkingBoyTwo = new GraduateParkingBoy(new ArrayList<>() {
             {
                 add(new ParkingLot(1));
             }
         });
-        Ticket parkResultFromParkingBoyOne = parkingBoyOne.park(new Car());
+        Ticket parkResultFromParkingBoyOne = graduateParkingBoyOne.park(new Car());
 
         TicketInvalidException exception = assertThrows(TicketInvalidException.class,
-                () -> parkingBoyTwo.pickUp(parkResultFromParkingBoyOne));
+                () -> graduateParkingBoyTwo.pickUp(parkResultFromParkingBoyOne));
         assertThat(exception).hasMessageContaining("Ticket无效");
     }
 
     @Test
     void should_pick_up_failed_when_pick_up_given_ticket_has_already_used() throws ParkingLotIsFullException, TicketInvalidException {
-        ParkingBoy parkingBoy = new ParkingBoy(new ArrayList<>() {
+        GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(new ArrayList<>() {
             {
                 add(new ParkingLot(1));
             }
         });
-        Ticket parkingResult = parkingBoy.park(new Car());
+        Ticket parkingResult = graduateParkingBoy.park(new Car());
         assertNotNull(parkingResult);
-        Car pickUpResult = parkingBoy.pickUp(parkingResult);
+        Car pickUpResult = graduateParkingBoy.pickUp(parkingResult);
         assertNotNull(pickUpResult);
 
         TicketInvalidException exception = assertThrows(TicketInvalidException.class,
-                () -> parkingBoy.pickUp(parkingResult));
+                () -> graduateParkingBoy.pickUp(parkingResult));
         assertThat(exception).hasMessageContaining("Ticket无效");
     }
 }
