@@ -3,7 +3,6 @@ package org.oobootcamp.ParkingLot;
 import java.util.ArrayList;
 
 import org.oobootcamp.ParkingLot.Model.Car;
-import org.oobootcamp.ParkingLot.Model.Result;
 import org.oobootcamp.ParkingLot.Model.Ticket;
 import org.oobootcamp.ParkingLot.ParkingLotExceptions.ParkingLotIsFullException;
 import org.oobootcamp.ParkingLot.ParkingLotExceptions.TicketInvalidException;
@@ -29,10 +28,9 @@ public class ParkingBoy {
         for (ParkingLot parkingLot : parkingLots) {
             try
             {
-                var pickUpResult = parkingLot.pickUp(ticket);
-                return  pickUpResult;
+                return parkingLot.pickUp(ticket);
             }
-            catch (TicketInvalidException e) {
+            catch (TicketInvalidException ignored) {
             }
         }
         throw new TicketInvalidException();

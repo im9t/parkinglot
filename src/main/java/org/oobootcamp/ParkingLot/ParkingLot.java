@@ -3,7 +3,6 @@ package org.oobootcamp.ParkingLot;
 import java.util.HashMap;
 
 import org.oobootcamp.ParkingLot.Model.Car;
-import org.oobootcamp.ParkingLot.Model.Result;
 import org.oobootcamp.ParkingLot.Model.Ticket;
 import org.oobootcamp.ParkingLot.ParkingLotExceptions.ParkingLotIsFullException;
 import org.oobootcamp.ParkingLot.ParkingLotExceptions.TicketInvalidException;
@@ -14,7 +13,7 @@ public class ParkingLot {
 
    public ParkingLot(int capacity) {
        this.capacity = capacity;
-       ticketsAndCars = new HashMap<Ticket, Car>();
+       ticketsAndCars = new HashMap<>();
    }
 
    public Ticket park(Car car) throws ParkingLotIsFullException {
