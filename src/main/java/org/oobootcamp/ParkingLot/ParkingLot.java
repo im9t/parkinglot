@@ -37,4 +37,9 @@ public class ParkingLot {
        }
        throw new TicketInvalidException();
    }
+
+   public int getAvailableSpace()
+   {
+       return capacity - ticketsAndCars.size();
+   }
 }
