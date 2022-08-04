@@ -5,6 +5,8 @@ import org.oobootcamp.ParkingLot.Model.Ticket;
 import org.oobootcamp.ParkingLot.ParkingLotExceptions.ParkingLotIsFullException;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.Optional;
 
 public class SmartParkingBoy extends ParkingBoy {
 
@@ -22,13 +24,9 @@ public class SmartParkingBoy extends ParkingBoy {
     }
 
     private ParkingLot getParkingLotHasMostAvailableSpace() {
-        if (parkingLots.size() == 0) throw new ParkingLotIsFullException();
+        Optional<ParkingLot> parkingLotHasMostAvailableSpace = parkingLots.stream().max(Comparator.comparing(i -> i.getAvailableSpace()));
+        if (parkingLotHasMostAvailableSpace.get() == null) throw new ParkingLotIsFullException();
 
-        ParkingLot parkingLotHasMostAvailableSpace = parkingLots.get(0);
-        for (ParkingLot parkingLot : parkingLots) {
-            if (parkingLot.getAvailableSpace() > parkingLotHasMostAvailableSpace.getAvailableSpace())
-                parkingLotHasMostAvailableSpace = parkingLot;
-        }
-        return parkingLotHasMostAvailableSpace;
+        return parkingLotHasMostAvailableSpace.get();
     }
 }
