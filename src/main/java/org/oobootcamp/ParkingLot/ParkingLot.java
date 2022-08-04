@@ -16,7 +16,7 @@ public class ParkingLot {
        ticketsAndCars = new HashMap<>();
    }
 
-   public Ticket park(Car car) throws ParkingLotIsFullException {
+   public Ticket park(Car car) {
        if (canParkMore()) {
            Ticket ticket = new Ticket();
            ticketsAndCars.put(ticket, car);
@@ -31,7 +31,7 @@ public class ParkingLot {
    }
 
 
-   public Car pickUp(Ticket ticket) throws TicketInvalidException {
+   public Car pickUp(Ticket ticket) {
        if (ticketsAndCars.containsKey(ticket)) {
            return ticketsAndCars.remove(ticket);
        }
