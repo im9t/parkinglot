@@ -3,45 +3,32 @@ package org.oobootcamp.ParkingLot;
 import org.oobootcamp.ParkingLot.Model.Car;
 import org.oobootcamp.ParkingLot.Model.Ticket;
 import org.oobootcamp.ParkingLot.ParkingLotExceptions.ParkingLotIsFullException;
-import org.oobootcamp.ParkingLot.ParkingLotExceptions.TicketInvalidException;
 
 import java.util.ArrayList;
 
-public class SmartParkingBoy {
-    private final ArrayList<ParkingLot> parkingLots;
-    private ParkingLot theParkingLotHavingMostSpace;
-    public SmartParkingBoy(ArrayList<ParkingLot> parkingLots) {
-        this.parkingLots = parkingLots;
+public class SmartParkingBoy extends ParkingBoy {
+
+    protected SmartParkingBoy(ArrayList<ParkingLot> parkingLots) {
+        super(parkingLots);
     }
 
+    @Override
     public Ticket park(Car car) throws ParkingLotIsFullException {
-        setUpTheMostAvailableParkingLot();
-        if(theParkingLotHavingMostSpace.canParkMore())
-        {
-            return theParkingLotHavingMostSpace.park(car);
+        ParkingLot parkingLot = getParkingLotHasMostAvailableSpace();
+        if (parkingLot.canParkMore()) {
+            return parkingLot.park(car);
         }
         throw new ParkingLotIsFullException();
     }
 
-    private void setUpTheMostAvailableParkingLot()
-    {
-        theParkingLotHavingMostSpace = parkingLots.get(0);
-        for (ParkingLot parkingLot : parkingLots)
-        {
-            if(parkingLot.getAvailableSpace() > theParkingLotHavingMostSpace.getAvailableSpace())
-                theParkingLotHavingMostSpace = parkingLot;
-        }
-    }
+    private ParkingLot getParkingLotHasMostAvailableSpace() {
+        if (parkingLots.size() == 0) throw new ParkingLotIsFullException();
 
-    public Car pickUp(Ticket ticket) throws TicketInvalidException {
+        ParkingLot parkingLotHasMostAvailableSpace = parkingLots.get(0);
         for (ParkingLot parkingLot : parkingLots) {
-            try
-            {
-                return parkingLot.pickUp(ticket);
-            }
-            catch (TicketInvalidException ignored) {
-            }
+            if (parkingLot.getAvailableSpace() > parkingLotHasMostAvailableSpace.getAvailableSpace())
+                parkingLotHasMostAvailableSpace = parkingLot;
         }
-        throw new TicketInvalidException();
+        return parkingLotHasMostAvailableSpace;
     }
 }
