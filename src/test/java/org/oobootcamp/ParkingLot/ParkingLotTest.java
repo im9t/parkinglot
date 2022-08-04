@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 import org.oobootcamp.ParkingLot.Model.Car;
-import org.oobootcamp.ParkingLot.Model.Result;
 import org.oobootcamp.ParkingLot.Model.Ticket;
 import org.oobootcamp.ParkingLot.ParkingLotExceptions.ParkingLotIsFullException;
 import org.oobootcamp.ParkingLot.ParkingLotExceptions.TicketInvalidException;
@@ -100,5 +99,19 @@ public class ParkingLotTest {
         parkingLot.park(new Car());
 
         assertEquals(1, parkingLot.getAvailableSpace());
+    }
+
+    @Test
+    void should_return_false_when_get_hasTicket_given_a_parking_lot_capacity_is_1_and_parked_0() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        Ticket ticket = new Ticket();
+        assertFalse(parkingLot.hasTicket(ticket));
+    }
+    @Test
+    void should_return_true_when_get_hasTicket_given_a_car_is_parked_in_this_parking_lot() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        Car car = new Car();
+        Ticket ticket = parkingLot.park(car);
+        assertTrue(parkingLot.hasTicket(ticket));
     }
 }

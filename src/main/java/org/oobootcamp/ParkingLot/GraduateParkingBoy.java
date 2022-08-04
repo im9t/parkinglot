@@ -15,22 +15,19 @@ public class GraduateParkingBoy {
         this.parkingLots = new ArrayList<>(parkingLots);
     }
 
-    public Ticket park(Car car) throws ParkingLotIsFullException {
+    public Ticket park(Car car) {
         for (ParkingLot parkingLot : parkingLots) {
             if (parkingLot.canParkMore()) {
                 return parkingLot.park(car);
             }
         }
-        throw  new ParkingLotIsFullException();
+        throw new ParkingLotIsFullException();
     }
 
-    public Car pickUp(Ticket ticket) throws TicketInvalidException {
+    public Car pickUp(Ticket ticket) {
         for (ParkingLot parkingLot : parkingLots) {
-            try
-            {
+            if (parkingLot.hasTicket(ticket)) {
                 return parkingLot.pickUp(ticket);
-            }
-            catch (TicketInvalidException ignored) {
             }
         }
         throw new TicketInvalidException();

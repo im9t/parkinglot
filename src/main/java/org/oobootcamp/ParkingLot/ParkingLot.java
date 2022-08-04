@@ -42,4 +42,8 @@ public class ParkingLot {
    {
        return capacity - ticketsAndCars.size();
    }
+
+    public boolean hasTicket(Ticket ticket) {
+        return ticketsAndCars.containsKey(ticket);
+    }
 }
