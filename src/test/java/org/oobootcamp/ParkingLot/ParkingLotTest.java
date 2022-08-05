@@ -77,13 +77,13 @@ public class ParkingLotTest {
         Car car = new Car();
         parkingLot.park(car);
 
-        assertFalse(parkingLot.canParkMore());
+        assertFalse(parkingLot.hasAvailableSpace());
     }
     @Test
     void should_return_true_when_get_can_park_more_given_a_parking_lot_capacity_is_one_and_parked_zero() {
         ParkingLot parkingLot = new ParkingLot(1);
 
-        assertTrue(parkingLot.canParkMore());
+        assertTrue(parkingLot.hasAvailableSpace());
     }
 
     @Test
@@ -105,13 +105,13 @@ public class ParkingLotTest {
     void should_return_false_when_get_hasTicket_given_a_parking_lot_capacity_is_1_and_parked_0() {
         ParkingLot parkingLot = new ParkingLot(1);
         Ticket ticket = new Ticket();
-        assertFalse(parkingLot.hasTicket(ticket));
+        assertFalse(parkingLot.hasCarWith(ticket));
     }
     @Test
     void should_return_true_when_get_hasTicket_given_a_car_is_parked_in_this_parking_lot() {
         ParkingLot parkingLot = new ParkingLot(1);
         Car car = new Car();
         Ticket ticket = parkingLot.park(car);
-        assertTrue(parkingLot.hasTicket(ticket));
+        assertTrue(parkingLot.hasCarWith(ticket));
     }
 }

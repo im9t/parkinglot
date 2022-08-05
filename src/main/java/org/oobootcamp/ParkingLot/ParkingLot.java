@@ -17,7 +17,7 @@ public class ParkingLot {
    }
 
    public Ticket park(Car car) {
-       if (canParkMore()) {
+       if (hasAvailableSpace()) {
            Ticket ticket = new Ticket();
            ticketsAndCars.put(ticket, car);
            return ticket;
@@ -25,7 +25,7 @@ public class ParkingLot {
        throw new ParkingLotIsFullException();
    }
 
-   public boolean canParkMore()
+   public boolean hasAvailableSpace()
    {
        return ticketsAndCars.size() < capacity;
    }
@@ -43,7 +43,7 @@ public class ParkingLot {
        return capacity - ticketsAndCars.size();
    }
 
-    public boolean hasTicket(Ticket ticket) {
+    public boolean hasCarWith(Ticket ticket) {
         return ticketsAndCars.containsKey(ticket);
     }
 }
