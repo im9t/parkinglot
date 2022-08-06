@@ -8,12 +8,24 @@ import org.oobootcamp.ParkingLot.ParkingLotExceptions.TicketInvalidException;
 import java.util.ArrayList;
 import java.util.Optional;
 
-public abstract class ParkingBoy {
+public abstract class ParkingBoy implements Parkable {
 
     protected final ArrayList<ParkingLot> parkingLots;
 
     protected ParkingBoy(ArrayList<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
+    }
+
+    @Override
+    public boolean hasAvailableSpace()
+    {
+        return parkingLots.stream().anyMatch(ParkingLot::hasAvailableSpace);
+    }
+
+    @Override
+    public boolean hasCarWith(Ticket ticket)
+    {
+        return parkingLots.stream().anyMatch(parkingLot -> parkingLot.hasCarWith(ticket));
     }
 
     public Ticket park(Car car) throws ParkingLotIsFullException {
