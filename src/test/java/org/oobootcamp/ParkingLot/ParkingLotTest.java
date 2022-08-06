@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.oobootcamp.ParkingLot.Model.Car;
 import org.oobootcamp.ParkingLot.Model.Ticket;
 import org.oobootcamp.ParkingLot.ParkingLotExceptions.ParkingLotIsFullException;
-import org.oobootcamp.ParkingLot.ParkingLotExceptions.TicketInvalidException;
+import org.oobootcamp.ParkingLot.ParkingLotExceptions.InvalidTicketException;
 
 
 public class ParkingLotTest {
@@ -51,7 +51,7 @@ public class ParkingLotTest {
         Car car = new Car();
         Ticket parkingTicket = parkingLotA.park(car);
 
-        TicketInvalidException exception = assertThrows(TicketInvalidException.class,
+        InvalidTicketException exception = assertThrows(InvalidTicketException.class,
                 () -> parkingLotB.pickUp(parkingTicket));
 
         assertThat(exception).hasMessageContaining("Ticket无效");
@@ -65,7 +65,7 @@ public class ParkingLotTest {
         Car firstPickUpResult = parkingLot.pickUp(parkingTicket);
         assertNotNull(firstPickUpResult);
 
-        TicketInvalidException exception = assertThrows(TicketInvalidException.class,
+        InvalidTicketException exception = assertThrows(InvalidTicketException.class,
                 () -> parkingLot.pickUp(parkingTicket));
 
         assertThat(exception).hasMessageContaining("Ticket无效");

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import org.oobootcamp.ParkingLot.Model.Car;
 import org.oobootcamp.ParkingLot.Model.Ticket;
 import org.oobootcamp.ParkingLot.ParkingLotExceptions.ParkingLotIsFullException;
-import org.oobootcamp.ParkingLot.ParkingLotExceptions.TicketInvalidException;
+import org.oobootcamp.ParkingLot.ParkingLotExceptions.InvalidTicketException;
 
 public class ParkingLot implements Parkable {
     private final HashMap<Ticket, Car> ticketsAndCars;
@@ -38,7 +38,7 @@ public class ParkingLot implements Parkable {
        if (ticketsAndCars.containsKey(ticket)) {
            return ticketsAndCars.remove(ticket);
        }
-       throw new TicketInvalidException();
+       throw new InvalidTicketException();
    }
 
    public int getAvailableSpace()

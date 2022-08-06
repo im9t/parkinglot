@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.oobootcamp.ParkingLot.Model.Car;
 import org.oobootcamp.ParkingLot.Model.Ticket;
 import org.oobootcamp.ParkingLot.ParkingLotExceptions.ParkingLotIsFullException;
-import org.oobootcamp.ParkingLot.ParkingLotExceptions.TicketInvalidException;
+import org.oobootcamp.ParkingLot.ParkingLotExceptions.InvalidTicketException;
 
 import java.util.ArrayList;
 
@@ -93,7 +93,7 @@ public class SmartParkingBoyTest {
         Ticket ticket = parkingLot.park(new Car());
 
 
-        TicketInvalidException exception = assertThrows(TicketInvalidException.class,
+        InvalidTicketException exception = assertThrows(InvalidTicketException.class,
                 () -> smartParkingBoyOne.pickUp(ticket));
         assertThat(exception).hasMessageContaining("Ticket无效");
     }
@@ -110,7 +110,7 @@ public class SmartParkingBoyTest {
         Car pickUpResult = smartParkingBoy.pickUp(parkingResult);
         assertNotNull(pickUpResult);
 
-        TicketInvalidException exception = assertThrows(TicketInvalidException.class,
+        InvalidTicketException exception = assertThrows(InvalidTicketException.class,
                 () -> smartParkingBoy.pickUp(parkingResult));
         assertThat(exception).hasMessageContaining("Ticket无效");
     }
