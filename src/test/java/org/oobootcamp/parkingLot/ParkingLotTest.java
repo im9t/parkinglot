@@ -1,13 +1,13 @@
-package org.oobootcamp.ParkingLot;
+package org.oobootcamp.parkingLot;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
-import org.oobootcamp.ParkingLot.Model.Car;
-import org.oobootcamp.ParkingLot.Model.Ticket;
-import org.oobootcamp.ParkingLot.ParkingLotExceptions.ParkingLotIsFullException;
-import org.oobootcamp.ParkingLot.ParkingLotExceptions.InvalidTicketException;
+import org.oobootcamp.parkingLot.model.Car;
+import org.oobootcamp.parkingLot.model.Ticket;
+import org.oobootcamp.parkingLot.exception.ParkingLotIsFullException;
+import org.oobootcamp.parkingLot.exception.InvalidTicketException;
 
 
 public class ParkingLotTest {

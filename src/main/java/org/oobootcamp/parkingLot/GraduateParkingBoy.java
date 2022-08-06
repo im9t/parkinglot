@@ -1,11 +1,11 @@
-package org.oobootcamp.ParkingLot;
+package org.oobootcamp.parkingLot;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
-public class GraduateParkingBoy extends ParkingBoy{
+public class GraduateParkingBoy extends ParkingBoy {
 
-    public GraduateParkingBoy(ArrayList<ParkingLot> parkingLots) {
+    public GraduateParkingBoy(List<ParkingLot> parkingLots) {
         super(parkingLots);
     }
 

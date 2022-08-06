@@ -1,4 +1,4 @@
-package org.oobootcamp.ParkingLot.Model;
+package org.oobootcamp.parkingLot.model;
 import java.util.UUID;
 
 public class Ticket {

@@ -1,30 +1,28 @@
-package org.oobootcamp.ParkingLot;
+package org.oobootcamp.parkingLot;
 
-import org.oobootcamp.ParkingLot.Model.Car;
-import org.oobootcamp.ParkingLot.Model.Ticket;
-import org.oobootcamp.ParkingLot.ParkingLotExceptions.ParkingLotIsFullException;
-import org.oobootcamp.ParkingLot.ParkingLotExceptions.InvalidTicketException;
+import org.oobootcamp.parkingLot.model.Car;
+import org.oobootcamp.parkingLot.model.Ticket;
+import org.oobootcamp.parkingLot.exception.ParkingLotIsFullException;
+import org.oobootcamp.parkingLot.exception.InvalidTicketException;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public abstract class ParkingBoy implements Parkable {
 
-    protected final ArrayList<ParkingLot> parkingLots;
+    protected final List<ParkingLot> parkingLots;
 
-    protected ParkingBoy(ArrayList<ParkingLot> parkingLots) {
+    protected ParkingBoy(List<ParkingLot> parkingLots) {
         this.parkingLots = parkingLots;
     }
 
     @Override
-    public boolean hasAvailableSpace()
-    {
+    public boolean hasAvailableSpace() {
         return parkingLots.stream().anyMatch(ParkingLot::hasAvailableSpace);
     }
 
     @Override
-    public boolean hasCarWith(Ticket ticket)
-    {
+    public boolean hasCarWith(Ticket ticket) {
         return parkingLots.stream().anyMatch(parkingLot -> parkingLot.hasCarWith(ticket));
     }
 

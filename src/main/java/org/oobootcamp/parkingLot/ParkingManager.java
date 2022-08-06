@@ -1,22 +1,22 @@
-package org.oobootcamp.ParkingLot;
+package org.oobootcamp.parkingLot;
 
-import org.oobootcamp.ParkingLot.Model.Car;
-import org.oobootcamp.ParkingLot.Model.Ticket;
-import org.oobootcamp.ParkingLot.ParkingLotExceptions.InvalidTicketException;
-import org.oobootcamp.ParkingLot.ParkingLotExceptions.ParkingLotIsFullException;
+import org.oobootcamp.parkingLot.model.Car;
+import org.oobootcamp.parkingLot.model.Ticket;
+import org.oobootcamp.parkingLot.exception.InvalidTicketException;
+import org.oobootcamp.parkingLot.exception.ParkingLotIsFullException;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ParkingManager {
-    private final ArrayList<Parkable> parkables;
-    public ParkingManager(ArrayList<Parkable> parkables) {
+    private final List<Parkable> parkables;
+
+    public ParkingManager(List<Parkable> parkables) {
         this.parkables = parkables;
     }
 
     public Ticket park(Car car) {
         for (Parkable parkable : parkables) {
-            if(parkable.hasAvailableSpace())
-            {
+            if (parkable.hasAvailableSpace()) {
                 return parkable.park(car);
             }
         }

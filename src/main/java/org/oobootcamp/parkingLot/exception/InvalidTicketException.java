@@ -1,4 +1,4 @@
-package org.oobootcamp.ParkingLot.ParkingLotExceptions;
+package org.oobootcamp.parkingLot.exception;
 
 public class InvalidTicketException extends RuntimeException {
     public InvalidTicketException()

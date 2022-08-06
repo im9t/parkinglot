@@ -1,12 +1,12 @@
-package org.oobootcamp.ParkingLot;
+package org.oobootcamp.parkingLot;
 
-import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Optional;
 
 public class SmartParkingBoy extends ParkingBoy {
 
-    protected SmartParkingBoy(ArrayList<ParkingLot> parkingLots) {
+    protected SmartParkingBoy(List<ParkingLot> parkingLots) {
         super(parkingLots);
     }
 

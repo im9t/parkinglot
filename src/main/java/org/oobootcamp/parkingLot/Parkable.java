@@ -1,7 +1,7 @@
-package org.oobootcamp.ParkingLot;
+package org.oobootcamp.parkingLot;
 
-import org.oobootcamp.ParkingLot.Model.Car;
-import org.oobootcamp.ParkingLot.Model.Ticket;
+import org.oobootcamp.parkingLot.model.Car;
+import org.oobootcamp.parkingLot.model.Ticket;
 
 public interface Parkable {
     Ticket park(Car car);

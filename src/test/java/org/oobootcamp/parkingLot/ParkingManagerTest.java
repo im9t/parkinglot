@@ -1,11 +1,11 @@
-package org.oobootcamp.ParkingLot;
+package org.oobootcamp.parkingLot;
 
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.oobootcamp.ParkingLot.Model.Car;
-import org.oobootcamp.ParkingLot.Model.Ticket;
-import org.oobootcamp.ParkingLot.ParkingLotExceptions.ParkingLotIsFullException;
-import org.oobootcamp.ParkingLot.ParkingLotExceptions.InvalidTicketException;
+import org.oobootcamp.parkingLot.model.Car;
+import org.oobootcamp.parkingLot.model.Ticket;
+import org.oobootcamp.parkingLot.exception.ParkingLotIsFullException;
+import org.oobootcamp.parkingLot.exception.InvalidTicketException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,50 +21,38 @@ public class ParkingManagerTest {
     {
         @Test
         void should_parking_by_smartBoy_when_parking_given_parkingManager_has_1_smartBoy_and_1_graduateBoy_and_1_parkingLot_all_of_them_not_parked() {
-            //Given
             SmartParkingBoy smartParkingBoy =new SmartParkingBoy(new ArrayList<>(List.of(new ParkingLot(1))));
             GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(new ArrayList<>(List.of(new ParkingLot(1))));
             ParkingLot parkingLot = new ParkingLot(1);
-            ArrayList<Parkable> parkables = new ArrayList<>(
-                    List.of(
-                            smartParkingBoy,
-                            graduateParkingBoy,
-                            parkingLot
-                    )
-            );
-            ParkingManager parkingManager = new ParkingManager(parkables);
+            ParkingManager parkingManager = new ParkingManager(List.of(
+                    smartParkingBoy,
+                    graduateParkingBoy,
+                    parkingLot
+            ));
             Car car = new Car();
 
-            //When
             Ticket ticket = parkingManager.park(car);
 
-            //Then
             Car carPickUp = smartParkingBoy.pickUp(ticket);
             assertEquals(car, carPickUp);
         }
 
         @Test
         void should_parking_by_managers_parking_lot_when_parking_given_parkingManager_has_1_graduateBoy_and_1_smartBoy_and_1_parkingLot_only_managers_parking_lot_not_parked() {
-            //Given
             SmartParkingBoy smartParkingBoy =new SmartParkingBoy(new ArrayList<>(List.of(new ParkingLot(1))));
             GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(new ArrayList<>(List.of(new ParkingLot(1))));
             ParkingLot parkingLot = new ParkingLot(1);
-            ArrayList<Parkable> parkables = new ArrayList<>(
-                    List.of(
-                            graduateParkingBoy,
-                            smartParkingBoy,
-                            parkingLot
-                    )
-            );
-            ParkingManager parkingManager = new ParkingManager(parkables);
+            ParkingManager parkingManager = new ParkingManager(List.of(
+                    graduateParkingBoy,
+                    smartParkingBoy,
+                    parkingLot
+            ));
             smartParkingBoy.park(new Car());
             graduateParkingBoy.park(new Car());
             Car car = new Car();
 
-            //When
             Ticket ticket = parkingManager.park(car);
 
-            //Then
             Car carPickUp = parkingLot.pickUp(ticket);
             assertEquals(car, carPickUp);
         }
@@ -74,14 +62,14 @@ public class ParkingManagerTest {
             SmartParkingBoy smartParkingBoy =new SmartParkingBoy(new ArrayList<>(List.of(new ParkingLot(1))));
             GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(new ArrayList<>(List.of(new ParkingLot(1))));
             ParkingLot parkingLot = new ParkingLot(1);
-            ArrayList<Parkable> parkables = new ArrayList<>(
+
+            ParkingManager parkingManager = new ParkingManager(
                     List.of(
                             graduateParkingBoy,
                             smartParkingBoy,
                             parkingLot
                     )
             );
-            ParkingManager parkingManager = new ParkingManager(parkables);
             smartParkingBoy.park(new Car());
             graduateParkingBoy.park(new Car());
             parkingLot.park(new Car());
@@ -101,16 +89,16 @@ public class ParkingManagerTest {
             SmartParkingBoy smartParkingBoy =new SmartParkingBoy(new ArrayList<>(List.of(new ParkingLot(1))));
             GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(new ArrayList<>(List.of(new ParkingLot(1))));
             ParkingLot parkingLot = new ParkingLot(1);
-            ArrayList<Parkable> parkables = new ArrayList<>(
+
+            smartParkingBoy.park(new Car());
+            graduateParkingBoy.park(new Car());
+            ParkingManager parkingManager = new ParkingManager(
                     List.of(
                             graduateParkingBoy,
                             smartParkingBoy,
                             parkingLot
                     )
             );
-            smartParkingBoy.park(new Car());
-            graduateParkingBoy.park(new Car());
-            ParkingManager parkingManager = new ParkingManager(parkables);
             Car car = new Car();
             Ticket ticket = parkingManager.park(car);
 
@@ -125,14 +113,14 @@ public class ParkingManagerTest {
             SmartParkingBoy smartParkingBoy =new SmartParkingBoy(new ArrayList<>(List.of(new ParkingLot(1))));
             GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(new ArrayList<>(List.of(new ParkingLot(1))));
             ParkingLot parkingLot = new ParkingLot(1);
-            ArrayList<Parkable> parkables = new ArrayList<>(
+
+            ParkingManager parkingManager = new ParkingManager(
                     List.of(
                             graduateParkingBoy,
                             smartParkingBoy,
                             parkingLot
                     )
             );
-            ParkingManager parkingManager = new ParkingManager(parkables);
             Car car = new Car();
             Ticket ticket = parkingManager.park(car);
 
@@ -143,20 +131,18 @@ public class ParkingManagerTest {
 
         @Test
         void should_pick_up_failed_when_pick_up_given_parkingManager_has_1_graduateBoy_and_1_smartBoy_and_1_parkingLot_and_ticket_which_is_already_used_to_pick_up_car_from_parking_lot() {
-            //Given
             SmartParkingBoy smartParkingBoy =new SmartParkingBoy(new ArrayList<>(List.of(new ParkingLot(1))));
             GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(new ArrayList<>(List.of(new ParkingLot(1))));
             ParkingLot parkingLot = new ParkingLot(1);
-            ArrayList<Parkable> parkables = new ArrayList<>(
+            smartParkingBoy.park(new Car());
+            graduateParkingBoy.park(new Car());
+            ParkingManager parkingManager = new ParkingManager(
                     List.of(
                             graduateParkingBoy,
                             smartParkingBoy,
                             parkingLot
                     )
             );
-            smartParkingBoy.park(new Car());
-            graduateParkingBoy.park(new Car());
-            ParkingManager parkingManager = new ParkingManager(parkables);
             Car car = new Car();
             Ticket ticket = parkingManager.park(car);
             parkingManager.pickUp(ticket);
@@ -167,10 +153,10 @@ public class ParkingManagerTest {
         }
         @Test
         void should_pick_up_failed_when_pick_up_card_from_parkingManagerB_given_parkingManagerA_has_1_graduateBoy_and_parkingManagerB_has_1_parking_lot_and_ticket_which_is_returned_by_parkingManagerA() {
-            ParkingManager parkingManagerA = new ParkingManager(new ArrayList<>(
-                    List.of(new GraduateParkingBoy(new ArrayList<>(List.of(new ParkingLot(1)))))
-            ));
-            ParkingManager parkingManagerB = new ParkingManager(new ArrayList<>(List.of(new ParkingLot(1))));
+            ParkingManager parkingManagerA = new ParkingManager(
+                    List.of(new GraduateParkingBoy(List.of(new ParkingLot(1))))
+            );
+            ParkingManager parkingManagerB = new ParkingManager(List.of(new ParkingLot(1)));
             Ticket ticket = parkingManagerA.park(new Car());
 
             InvalidTicketException exception = assertThrows(InvalidTicketException.class,
