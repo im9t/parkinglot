@@ -92,7 +92,7 @@ public class SmartParkingBoyTest {
 
         InvalidTicketException exception = assertThrows(InvalidTicketException.class,
                 () -> smartParkingBoyOne.pickUp(ticket));
-        assertThat(exception).hasMessageContaining("Ticket无效");
+        assertThat(exception).hasMessageContaining("无效Ticket");
     }
 
     @Test
@@ -105,7 +105,7 @@ public class SmartParkingBoyTest {
 
         InvalidTicketException exception = assertThrows(InvalidTicketException.class,
                 () -> smartParkingBoy.pickUp(parkingResult));
-        assertThat(exception).hasMessageContaining("Ticket无效");
+        assertThat(exception).hasMessageContaining("无效Ticket");
     }
 
 }

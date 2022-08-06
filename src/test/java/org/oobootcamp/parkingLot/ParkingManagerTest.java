@@ -149,7 +149,7 @@ public class ParkingManagerTest {
 
             InvalidTicketException exception = assertThrows(InvalidTicketException.class,
                     () -> parkingManager.pickUp(ticket));
-            assertThat(exception).hasMessageContaining("Ticket无效");
+            assertThat(exception).hasMessageContaining("无效Ticket");
         }
         @Test
         void should_pick_up_failed_when_pick_up_card_from_parkingManagerB_given_parkingManagerA_has_1_graduateBoy_and_parkingManagerB_has_1_parking_lot_and_ticket_which_is_returned_by_parkingManagerA() {
@@ -161,7 +161,7 @@ public class ParkingManagerTest {
 
             InvalidTicketException exception = assertThrows(InvalidTicketException.class,
                     () -> parkingManagerB.pickUp(ticket));
-            assertThat(exception).hasMessageContaining("Ticket无效");
+            assertThat(exception).hasMessageContaining("无效Ticket");
         }
     }
 }

@@ -54,7 +54,7 @@ public class ParkingLotTest {
         InvalidTicketException exception = assertThrows(InvalidTicketException.class,
                 () -> parkingLotB.pickUp(parkingTicket));
 
-        assertThat(exception).hasMessageContaining("Ticket无效");
+        assertThat(exception).hasMessageContaining("无效Ticket");
     }
 
     @Test
@@ -68,7 +68,7 @@ public class ParkingLotTest {
         InvalidTicketException exception = assertThrows(InvalidTicketException.class,
                 () -> parkingLot.pickUp(parkingTicket));
 
-        assertThat(exception).hasMessageContaining("Ticket无效");
+        assertThat(exception).hasMessageContaining("无效Ticket");
     }
 
     @Test
