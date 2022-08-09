@@ -17,10 +17,10 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class ParkingManagerTest {
 
     @Nested
-    public class Parking
+    public class ParkingSucceedByOrder_WhenParking_GivenMultipleParkingBoysOrParkingLots
     {
         @Test
-        void should_parking_by_smartBoy_when_parking_given_parkingManager_has_1_smartBoy_and_1_graduateBoy_and_1_parkingLot_all_of_them_not_parked() {
+        void should_parking_to_smartBoy_given_1_smartBoy_and_1_graduateBoy_and_1_parkingLot_are_available() {
             SmartParkingBoy smartParkingBoy =new SmartParkingBoy(new ArrayList<>(List.of(new ParkingLot(1))));
             GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(new ArrayList<>(List.of(new ParkingLot(1))));
             ParkingLot parkingLot = new ParkingLot(1);
@@ -33,12 +33,12 @@ public class ParkingManagerTest {
 
             Ticket ticket = parkingManager.park(car);
 
-            Car carPickUp = smartParkingBoy.pickUp(ticket);
-            assertEquals(car, carPickUp);
+            Car pickedCar = smartParkingBoy.pickUp(ticket);
+            assertEquals(car, pickedCar);
         }
 
         @Test
-        void should_parking_by_managers_parking_lot_when_parking_given_parkingManager_has_1_graduateBoy_and_1_smartBoy_and_1_parkingLot_only_managers_parking_lot_not_parked() {
+        void should_parking_by_managers_parking_lot_given_1_graduateBoy_and_1_smartBoy_and_1_parkingLot_only_managers_parking_lot_not_parked() {
             SmartParkingBoy smartParkingBoy =new SmartParkingBoy(new ArrayList<>(List.of(new ParkingLot(1))));
             GraduateParkingBoy graduateParkingBoy = new GraduateParkingBoy(new ArrayList<>(List.of(new ParkingLot(1))));
             ParkingLot parkingLot = new ParkingLot(1);
